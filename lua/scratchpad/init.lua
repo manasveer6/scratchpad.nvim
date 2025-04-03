@@ -53,11 +53,11 @@ function M.open()
 		{ noremap = true, silent = true, expr = true }
 	)
 
-	-- Insert `- [ ] ` when using `o` in normal mode (new line below)
-	vim.api.nvim_buf_set_keymap(M.buf, "n", "o", [[o- [ ] <Esc>]], { noremap = true, silent = true })
+	-- Insert `- [ ] ` when using `o` in normal mode (new line below) and go to insert mode
+	vim.api.nvim_buf_set_keymap(M.buf, "n", "o", [[o- [ ] <Esc>i]], { noremap = true, silent = true })
 
-	-- Insert `- [ ] ` when using `O` in normal mode (new line above)
-	vim.api.nvim_buf_set_keymap(M.buf, "n", "O", [[O- [ ] <Esc>]], { noremap = true, silent = true })
+	-- Insert `- [ ] ` when using `O` in normal mode (new line above) and go to insert mode
+	vim.api.nvim_buf_set_keymap(M.buf, "n", "O", [[O- [ ] <Esc>i]], { noremap = true, silent = true })
 
 	-- Close scratchpad with `q`
 	vim.api.nvim_buf_set_keymap(
