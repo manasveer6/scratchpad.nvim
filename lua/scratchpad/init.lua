@@ -44,8 +44,23 @@ function M.open()
 		vim.api.nvim_buf_set_lines(M.buf, 0, -1, false, { "- [ ] Write something here!" })
 	end
 
-	-- Auto-insert `- [ ] ` when pressing Enter in insert mode
-	vim.api.nvim_buf_set_keymap(M.buf, "i", "<CR>", " <C-o>o- [ ] ", { noremap = true, silent = true })
+	-- Normal Enter: Auto-indent and create a new task
+	vim.api.nvim_buf_set_keymap(
+		M.buf,
+		"i",
+		"<CR>",
+		[[<C-o>o<C-r>=repeat(' ', indent('.')/&shiftwidth) . '- [ ] '<CR>]],
+		{ noremap = true, silent = true, expr = true }
+	)
+
+	-- Shift + Enter: Create a subtask (extra indentation)
+	vim.api.nvim_buf_set_keymap(
+		M.buf,
+		"i",
+		"<S-CR>",
+		[[<C-o>o<C-r>=repeat(' ', indent('.') + &shiftwidth) . '- [ ] '<CR>]],
+		{ noremap = true, silent = true, expr = true }
+	)
 end
 
 -- Save buffer contents to .scratchpad file
