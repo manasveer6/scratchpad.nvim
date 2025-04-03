@@ -19,17 +19,22 @@ function M.open()
 	vim.api.nvim_buf_set_option(M.buf, "filetype", "scratchpad")
 
 	-- Get editor size
-	local width = vim.api.nvim_get_option("columns")
-	local height = vim.api.nvim_get_option("lines")
+	local width = math.floor(vim.o.columns * Config.options.width)
+	local height = math.floor(vim.o.lines * Config.options.height)
+	local row = math.floor(vim.o.lines * Config.options.row)
+	local col = math.floor(vim.o.columns * Config.options.col)
+	local relative = Config.options.relative
+	local style = Config.options.style
+	local border = Config.options.border
 
 	local win_opts = {
-		relative = "editor",
-		width = math.floor(width * 0.6),
-		height = math.floor(height * 0.6),
-		row = math.floor(height * 0.2),
-		col = math.floor(width * 0.2),
-		style = "minimal",
-		border = "rounded",
+		width = width,
+		height = height,
+		row = row,
+		col = col,
+		relative = relative,
+		style = style,
+		border = border,
 	}
 
 	-- Open floating window
@@ -54,10 +59,10 @@ function M.open()
 	)
 
 	-- Insert `- [ ] ` when using `o` in normal mode (new line below) and go to insert mode
-	vim.api.nvim_buf_set_keymap(M.buf, "n", "o", [[o- [ ] <Esc>i]], { noremap = true, silent = true })
+	vim.api.nvim_buf_set_keymap(M.buf, "n", "o", [[o- [ ] <Esc>a]], { noremap = true, silent = true })
 
 	-- Insert `- [ ] ` when using `O` in normal mode (new line above) and go to insert mode
-	vim.api.nvim_buf_set_keymap(M.buf, "n", "O", [[O- [ ] <Esc>i]], { noremap = true, silent = true })
+	vim.api.nvim_buf_set_keymap(M.buf, "n", "O", [[O- [ ] <Esc>a]], { noremap = true, silent = true })
 
 	-- Close scratchpad with `q`
 	vim.api.nvim_buf_set_keymap(
