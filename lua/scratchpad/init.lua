@@ -13,8 +13,8 @@ function M.open()
 
   -- Create buffer
   M.buf = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_buf_set_option_value("bufhidden", "wipe", { buf = M.buf })
-  vim.api.nvim_buf_set_option_value("filetype", "scratchpad", { buf = M.buf })
+  vim.api.nvim_buf_set_option(M.buf, "bufhidden", "wipe")
+  vim.api.nvim_buf_set_option(M.buf, "filetype", "scratchpad")
 
   -- Get editor size
   local width = vim.api.nvim_get_option("columns")
