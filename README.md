@@ -10,7 +10,7 @@ A simple floating scratchpad for tracking project tasks inside Neovim. Supports 
 
 ```lua
 {
-  "yourusername/scratchpad.nvim",
+  "manasveer6/scratchpad.nvim",
   config = function()
     require("scratchpad").setup()
   end
@@ -21,7 +21,7 @@ A simple floating scratchpad for tracking project tasks inside Neovim. Supports 
 
 ```lua
 use({
-  "yourusername/scratchpad.nvim",
+  "manasveer6/scratchpad.nvim",
   config = function()
     require("scratchpad").setup()
   end
@@ -93,3 +93,6 @@ MIT License.
 - [ ] Persistent tasks (save tasks across Neovim sessions)
 - [ ] Custom checkbox symbols (e.g., `☐` → `✔`)
 - [ ] Markdown export (`scratchpad.md`)
+- [ ] Different scratchpad modes (e.g., “Notes Mode” without checkboxes)
+- [ ] Keyboard shortcut to clear completed tasks (remove [✓] lines)
+- [ ] Priority levels ([!] for high priority, [?] for unsure tasks)
