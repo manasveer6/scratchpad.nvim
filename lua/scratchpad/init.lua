@@ -38,13 +38,8 @@ function M.open()
 	-- Load scratchpad from file
 	M.load()
 
-	-- Auto-insert `- [ ] ` on Enter
-	vim.api.nvim_create_autocmd("BufEnter", {
-		buffer = M.buf,
-		callback = function()
-			vim.api.nvim_buf_set_keymap(M.buf, "i", "<CR>", [[<CR>- [ ] ]], { noremap = true, silent = true })
-		end,
-	})
+	-- Auto-insert `- [ ] ` when pressing Enter in insert mode
+	vim.api.nvim_buf_set_keymap(M.buf, "i", "<CR>", " <C-o>o- [ ] ", { noremap = true, silent = true })
 end
 
 -- Save buffer contents to .scratchpad file
