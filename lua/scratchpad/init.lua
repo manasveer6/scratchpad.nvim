@@ -38,6 +38,12 @@ function M.open()
 	-- Load scratchpad from file
 	M.load()
 
+	-- Check if buffer is empty, then add default message
+	local lines = vim.api.nvim_buf_get_lines(M.buf, 0, -1, false)
+	if #lines == 0 or (#lines == 1 and lines[1] == "") then
+		vim.api.nvim_buf_set_lines(M.buf, 0, -1, false, { "- [ ] Write something here!" })
+	end
+
 	-- Auto-insert `- [ ] ` when pressing Enter in insert mode
 	vim.api.nvim_buf_set_keymap(M.buf, "i", "<CR>", " <C-o>o- [ ] ", { noremap = true, silent = true })
 end
