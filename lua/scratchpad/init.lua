@@ -44,7 +44,7 @@ function M.open()
 		vim.api.nvim_buf_set_lines(M.buf, 0, -1, false, { "- [ ] Write something here!" })
 	end
 
-	-- Normal Enter: Auto-indent and create a new task
+	-- Insert `- [ ] ` when pressing Enter in insert mode
 	vim.api.nvim_buf_set_keymap(
 		M.buf,
 		"i",
@@ -53,14 +53,29 @@ function M.open()
 		{ noremap = true, silent = true, expr = true }
 	)
 
-	-- Shift + Enter: Create a subtask (extra indentation)
+	-- Insert `- [ ] ` when using `o` in normal mode (new line below)
+	vim.api.nvim_buf_set_keymap(M.buf, "n", "o", [[o- [ ] <Esc>]], { noremap = true, silent = true })
+
+	-- Insert `- [ ] ` when using `O` in normal mode (new line above)
+	vim.api.nvim_buf_set_keymap(M.buf, "n", "O", [[O- [ ] <Esc>]], { noremap = true, silent = true })
+
+	-- Close scratchpad with `q`
 	vim.api.nvim_buf_set_keymap(
 		M.buf,
-		"i",
-		"<S-CR>",
-		[[<C-o>o<C-r>=repeat(' ', indent('.') + &shiftwidth) . '- [ ] '<CR>]],
-		{ noremap = true, silent = true, expr = true }
+		"n",
+		"q",
+		[[<Cmd>lua require('scratchpad').close()<CR>]],
+		{ noremap = true, silent = true }
 	)
+end
+
+-- Function to close the scratchpad
+function M.close()
+	if M.win and vim.api.nvim_win_is_valid(M.win) then
+		vim.api.nvim_win_close(M.win, true)
+		M.win = nil
+		M.buf = nil
+	end
 end
 
 -- Save buffer contents to .scratchpad file
