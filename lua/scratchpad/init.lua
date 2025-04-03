@@ -138,7 +138,7 @@ end
 
 -- Setup function to allow user configuration
 function M.setup(user_config)
-	Config.set(user_config)
+	Config.setup(user_config)
 
 	vim.api.nvim_set_keymap(
 		"n",
