@@ -23,6 +23,8 @@ function M.open()
 	local height = math.floor(vim.o.lines * Config.options.height)
 	local row = math.floor(vim.o.lines * Config.options.row)
 	local col = math.floor(vim.o.columns * Config.options.col)
+
+	-- Get window options
 	local relative = Config.options.relative
 	local style = Config.options.style
 	local border = Config.options.border
@@ -157,5 +159,17 @@ function M.setup(user_config)
 		callback = M.save,
 	})
 end
+
+function M.toggle()
+	if M.win and vim.api.nvim_win_is_valid(M.win) then
+		M.close()
+	else
+		M.open()
+	end
+end
+
+vim.api.nvim_create_user_command("ScratchPad", function()
+	require("scratchpad").toggle()
+end, {})
 
 return M
