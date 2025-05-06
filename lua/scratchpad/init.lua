@@ -56,16 +56,15 @@ function M.open()
 	vim.bo.tabstop = 4
 
 	-- Insert `- [ ] ` when pressing Enter in insert mode
-	vim.keymap.set("i", "<CR>", function()
-		return "<CR>- [ ] "
-	end, { buffer = M.buf, expr = true, noremap = true })
-	-- vim.api.nvim_buf_set_keymap(
-	-- 	M.buf,
-	-- 	"i",
-	-- 	"<CR>",
-	-- 	[[<C-o>o<C-r>=repeat(' ', indent('.')/&shiftwidth) . '- [ ] '<CR>]],
-	-- 	{ noremap = true, silent = true, expr = true }
-	-- )
+	if M.options.auto_checkbox then
+		vim.keymap.set("i", "<CR>", function()
+			if M.options.auto_indent then
+				return "<CR>- [ ] "
+			else
+				return "<Esc>o- [ ] <Esc>a"
+			end
+		end, { buffer = M.buf, expr = true, noremap = true })
+	end
 
 	-- Insert `- [ ] ` when using `o` in normal mode (new line below) and go to insert mode
 	vim.api.nvim_buf_set_keymap(M.buf, "n", "o", [[o- [ ] <Esc>a]], { noremap = true, silent = true })

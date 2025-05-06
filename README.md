@@ -63,7 +63,7 @@ require("scratchpad").setup({
 ### Managing Tasks
 
 - New tasks automatically start with `- [ ]`
-- Press `Enter` to add a new checkbox task.
+- Press `Enter` to add a new checkbox task with the correct indentation.
 - Alternatively use `o` or `O` in normal mode to create a new checkbox task on a new line.
 - Indent (`>>`) to create subtasks.
 - Press `<leader>xc` to toggle checkboxes `[ ]` → `[✓]`
