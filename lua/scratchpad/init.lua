@@ -51,9 +51,13 @@ function M.open()
 		vim.api.nvim_buf_set_lines(M.buf, 0, -1, false, { "- [ ] Write something here!" })
 	end
 
+	vim.bo.expandtab = true
+	vim.bo.shiftwidth = 4
+	vim.bo.tabstop = 4
+
 	-- Insert `- [ ] ` when pressing Enter in insert mode
 	vim.keymap.set("i", "<CR>", function()
-		return "<CR><C-o>^<C-o>i- [ ] "
+		return "<CR><C-o>I- [ ] "
 	end, { buffer = M.buf, expr = true, noremap = true })
 	-- vim.api.nvim_buf_set_keymap(
 	-- 	M.buf,
