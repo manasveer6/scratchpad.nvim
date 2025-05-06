@@ -52,7 +52,9 @@ function M.open()
 	end
 
 	-- Insert `- [ ] ` when pressing Enter in insert mode
-	vim.keymap.set("i", "<CR>", "<CR><C-o>^i- [ ] ", { buffer = M.buf, noremap = true })
+	vim.keymap.set("i", "<CR>", function()
+		return "<CR><C-o>^<C-o>i- [ ] "
+	end, { buffer = M.buf, expr = true, noremap = true })
 	-- vim.api.nvim_buf_set_keymap(
 	-- 	M.buf,
 	-- 	"i",
