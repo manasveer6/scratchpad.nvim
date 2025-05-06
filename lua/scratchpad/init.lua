@@ -66,7 +66,7 @@ function M.open()
 		end, { buffer = M.buf, expr = true, noremap = true })
 	end
 
-	if M.options.auto_checkbox then
+	if Config.options.auto_checkbox then
 		-- Insert `- [ ] ` when using `o` in normal mode (new line below) and go to insert mode
 		vim.api.nvim_buf_set_keymap(M.buf, "n", "o", [[o- [ ] <Esc>a]], { noremap = true, silent = true })
 
