@@ -52,15 +52,10 @@ function M.open()
 	end
 
 	-- Insert `- [ ] ` when pressing Enter in insert mode
-	vim.api.nvim_buf_set_keymap(M.buf, "i", "<CR>", "", {
-		noremap = true,
-		silent = true,
-		expr = true,
-		callback = function()
-			local indent = string.rep(" ", vim.fn.indent("."))
-			return "\n" .. indent .. "- [ ] "
-		end,
-	})
+	vim.keymap.set("i", "<CR>", function()
+		local indent = string.match(vim.fn.getline("."), "^%s*") or ""
+		return "\n" .. indent .. "- [ ] "
+	end, { buffer = M.buf, expr = true, noremap = true })
 	-- vim.api.nvim_buf_set_keymap(
 	-- 	M.buf,
 	-- 	"i",
