@@ -56,9 +56,9 @@ function M.open()
 	vim.bo.tabstop = 4
 
 	-- Insert `- [ ] ` when pressing Enter in insert mode
-	if M.options.auto_checkbox then
+	if Config.options.auto_checkbox then
 		vim.keymap.set("i", "<CR>", function()
-			if M.options.auto_indent then
+			if Config.options.auto_indent then
 				return "<CR>- [ ] "
 			else
 				return "<Esc>o- [ ] <Esc>a"
